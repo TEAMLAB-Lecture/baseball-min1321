@@ -99,6 +99,8 @@ def is_duplicated_number(three_digit):
             temp.append(i)
         elif i in temp:
             return True
+        else :
+            temp.append(i)
 
     result = False
     # ==================================
@@ -127,7 +129,7 @@ def is_validated_number(user_input_number):
     # '''
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
-    if is_digit(user_input_number) and is_between_100_and_999(user_input_number) and not is_duplicated_number(user_input_number):\
+    if is_digit(user_input_number) and is_between_100_and_999(user_input_number) and not is_duplicated_number(user_input_number): 
         return True
 
     result = False
@@ -274,30 +276,72 @@ def is_no(one_more_input):
     return result
 
 
+# def main():
+#     print("Play Baseball")
+#     user_input = 999
+#     finish = False
+#     while not finish:
+#         random_number = str(get_not_duplicated_three_digit_number())
+#         print("Random Number is : ", random_number)
+#         # ===Modify codes below=============
+#         # 위의 코드를 포함하여 자유로운 수정이 가능함
+#         while not is_validated_number(user_input) or random_number != str(user_input):
+#             user_input = input('Input guess number : ')
+#             if user_input == "0":
+#                 finish = True
+#                 break
+#             if not is_validated_number(user_input):
+#                 print("Wrong Input, Input again")
+#                 continue
+#             strikes, balls = get_strikes_or_ball(user_input, random_number)
+#             print(f"Strikes : {strikes}, Balls : {balls}")
+#             if strikes == 3:
+#                 YES_NO = "K"
+#                 while not (is_yes(YES_NO) or is_no(YES_NO)):
+#                     YES_NO = input("You win, one more(Y/N)?")
+#                     print("Wrong Input, Input again")
+#                 if is_yes(YES_NO):
+#                     finish = False
+#                     break
+#                 elif is_no(YES_NO):
+#                     finish = True
+#                     break
+
+#     # ==================================
+#     print("Thank you for using this program")
+#     print("End of the Game")
+
 def main():
     print("Play Baseball")
     user_input = 999
     finish = False
     while not finish:
         random_number = str(get_not_duplicated_three_digit_number())
+        while random_number == user_input:
+            random_number = str(get_not_duplicated_three_digit_number())
         print("Random Number is : ", random_number)
-        # ===Modify codes below=============
-        # 위의 코드를 포함하여 자유로운 수정이 가능함
-        while not is_validated_number(user_input) or random_number != str(user_input):
-            user_input = input('Input guess number : ')
-            if user_input == "0":
-                finish = True
+        
+#          while or random_number != str(user_input):
+        while random_number != str(user_input):
+            user_input = "999"
+            while not is_validated_number(user_input):
+                user_input = input('Input guess number : ')
+                if user_input == "0":
+                    finish = True
+                    break
+                if not is_validated_number(user_input):
+                    print("Wrong Input, Input again")
+                    continue
+            if finish:
                 break
-            if not is_validated_number(user_input):
-                print("Wrong Input, Input again")
-                continue
             strikes, balls = get_strikes_or_ball(user_input, random_number)
             print(f"Strikes : {strikes}, Balls : {balls}")
             if strikes == 3:
-                YES_NO = "K"
+                YES_NO = input("You win, one more(Y/N)?")
                 while not (is_yes(YES_NO) or is_no(YES_NO)):
-                    YES_NO = input("You win, one more(Y/N)?")
                     print("Wrong Input, Input again")
+                    YES_NO = input("You win, one more(Y/N)?")
+
                 if is_yes(YES_NO):
                     finish = False
                     break
@@ -305,7 +349,6 @@ def main():
                     finish = True
                     break
 
-    # ==================================
     print("Thank you for using this program")
     print("End of the Game")
 
